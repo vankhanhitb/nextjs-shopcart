@@ -29,3 +29,5 @@ yarn-debug/log*
 next-env.d.ts
 build
 package-lock.json
+.env
+tsconfig.tsbuildinfo

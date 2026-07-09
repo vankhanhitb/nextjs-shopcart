@@ -1,3 +1,4 @@
+
 import CartIcon from "./CartIcon";
 import Container from "./Container";
 import FavoriteButton from "./FavoriteButton";
@@ -7,7 +8,12 @@ import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar"
 import SignIn from "./SignIn";
 
-export default function Header(){
+import { currentUser } from "@clerk/nextjs/server";
+import { ClerkLoaded, UserButton, Show, SignUpButton } from "@clerk/nextjs";
+
+export default async function Header(){
+  const userCurrent = await currentUser();
+
   return(
     <header className="header bg-white py-5 border-b border-b-black-50">
       <Container className="max-w-full flex items-center justify-between text-light"> 
@@ -23,7 +29,14 @@ export default function Header(){
           <SearchBar />
           <CartIcon />
           <FavoriteButton />
-          <SignIn />
+          <ClerkLoaded>
+            <Show when="signed-out">
+              <SignIn />
+            </Show>
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
+          </ClerkLoaded>
         </div>
       </Container>
     </header>

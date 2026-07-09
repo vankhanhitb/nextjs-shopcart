@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-
+import { ClerkProvider } from '@clerk/nextjs'
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
@@ -20,14 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className="min-h-full font-poppins antialiased">
-        <Header />
-          <Container>
-            {children}
-          </Container>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={cn("font-sans", geist.variable)}>
+        <body className="min-h-full font-poppins antialiased">
+          <Header />
+            <Container>
+              {children}
+            </Container>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
