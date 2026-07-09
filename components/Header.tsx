@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar"
 import SignIn from "./SignIn";
 
 import { currentUser } from "@clerk/nextjs/server";
-import { ClerkLoaded, UserButton, Show, SignUpButton } from "@clerk/nextjs";
+import { ClerkLoaded, UserButton, Show } from "@clerk/nextjs";
 
 export default async function Header(){
   const userCurrent = await currentUser();
