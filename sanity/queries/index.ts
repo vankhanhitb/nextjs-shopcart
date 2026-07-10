@@ -2,7 +2,7 @@ import "server-only";
 
 import { client } from "../lib/client";
 
-import { BRAND_QUERY } from "./query";
+import { BRAND_QUERY, BLOGS_QUERY } from "./query";
 
 const categoryFields = `{
   ...,
@@ -36,4 +36,14 @@ export const getBrand = async () => {
     return [];
   }
 };
+
+export const getLatestBlogs = async () => {
+  const query = BLOGS_QUERY;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+}
 

@@ -62,11 +62,11 @@ export default async function ShopByBrand() {
           </Link>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 p-2 shadow-sm hover:shadow-shop_light_green/20 py-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 p-2 shadow-sm hover:shadow-shop-light-green/20 py-5">
         {extraData?.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 group text-lightColor hover:text-shop_light_green"
+            className="flex items-center gap-3 group text-light-color hover:text-shop-light-green"
           >
             <span className="inline-flex scale-100 group-hover:scale-90 hoverEffect">
               {item?.icon}

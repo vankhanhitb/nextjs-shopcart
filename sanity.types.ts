@@ -118,6 +118,7 @@ export type Blog = {
   blogcategories?: Array<
     {
       _key: string;
+      title?: string;
     } & BlogcategoryReference
   >;
   publishedAt?: string;
