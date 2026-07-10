@@ -84,7 +84,7 @@ export const addressType = defineType({
     },
     prepare({title, subtitle, city, state, isDefault}) {
       return {
-        title: `${title} ${isDefault} ? "(Default)" : ""`,
+        title: `${title} ${isDefault ? "(Default)" : ""}`,
         subtitle: `${subtitle}, ${city}, ${state}`,
       }
     }
