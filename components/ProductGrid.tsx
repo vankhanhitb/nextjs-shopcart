@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import HomeTabBar from "./ui/HomeTabBar";
 import { productType } from "@/constants/data";
-
+import { AnimatePresence, motion } from "motion/react"
+import { Loader2 } from "lucide-react";
+import NoProductAvailable from "@/components/NoProductAvailable"
+import ProductCard from "./ProductCard";
 type Product = {
   _id: string;
   name: string;
@@ -41,9 +44,33 @@ export default function ProductGrid() {
   return (
     <div className="product-grid">
       <HomeTabBar selectedTab={selectedTab} onTabselect={(tab) => setSelectedTab(tab)} />
-      <p className="mt-4 text-sm text-light">
-        {loading ? "Loading products..." : `${products.length} products found`}
-      </p>
+      {loading ? (<div className="flex flex-col items-center justify-center py-10 min-h-80 gap-4 bg-gray-100 w-full mt-10">
+        <div className="space-x-2 flex items-center text-blue-600">
+          <Loader2  className="w-5 h-6 animate-spin"/>
+          <span>Product is Loading....</span>  
+        </div>  
+      </div>) : (
+        products?.length ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
+          {products?.map((product) => {
+            return(
+              <AnimatePresence key={product?._id}>
+                <motion.div 
+                  layout 
+                  initial={{ opacity: 0.2 }} 
+                  animate={{opacity:1}} 
+                  exit={{opacity:0}}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
+              </AnimatePresence>
+            )
+          })}
+        </div>
+        ):(
+          <NoProductAvailable selectedTab={selectedTab} />
+        )
+      )}
     </div>
   )
 }
