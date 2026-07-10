@@ -21,7 +21,7 @@ export default function AddToCartButton({product, className}: Props) {
       <Button 
       onClick={() => handleAddToCart()}
       disabled={isOutOfStock}
-      className={cn("w-full h-auto bg-shop-dark-green/80 text-white shadow-none border border-shop-dark-green/80 font-semibold rounded-full tracking-wide pt-3 pb-3 hover:text-white hover:bg-shop-dark-green hover:border-shop-dark-green hoverEffect")}>
+      className={cn("w-full mt-1.5 h-auto bg-shop-dark-green/80 text-white shadow-none border border-shop-dark-green/80 font-semibold rounded-full tracking-wide pt-3 pb-3 hover:text-white hover:bg-shop-dark-green hover:border-shop-dark-green hoverEffect")}>
         <ShoppingBag /> {isOutOfStock ? "Out of Stock" : "Add To Cart"}
       </Button>
     </div>
