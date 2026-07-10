@@ -2,6 +2,8 @@ import "server-only";
 
 import { client } from "../lib/client";
 
+import { BRAND_QUERY } from "./query";
+
 const categoryFields = `{
   ...,
   "productCount": count(*[_type == "product" && references(^._id)])
@@ -24,3 +26,14 @@ export const getCategories = async (quantity?: number) => {
     return [];
   }
 };
+
+export const getBrand = async () => {
+  const query = BRAND_QUERY;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+};
+

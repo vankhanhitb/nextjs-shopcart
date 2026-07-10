@@ -14,7 +14,8 @@ export type Product = {
 
 export type Category = {
   _id: string,
-  name: string,
+  title: string,
+  productCount: number,
   slug?: { current: string},
-  images?: unknown;
+  image?: string;
 }

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typegen": "npx sanity@latest schema extract && npx@latest typegen generate"
+    "typegen": "npx sanity@latest schema extract && npx sanity@latest typegen generate" 
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
