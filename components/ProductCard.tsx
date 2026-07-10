@@ -8,6 +8,8 @@ import { Title } from './ui/text';
 import PriceView from './PriceView';
 import AddToCartButton from './AddToCartButton';
 
+import type { Product } from "@/types";
+
 export default function ProductCard({ product }:{product: Product}) {
   return (
     <div className="text-sm border border-dark-blue/20 rounded-md bg-white group">
