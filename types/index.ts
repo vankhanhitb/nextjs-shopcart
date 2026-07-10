@@ -11,3 +11,10 @@ export type Product = {
   variant?: string;
   categories?: string[];
 }
+
+export type Category = {
+  _id: string,
+  name: string,
+  slug?: { current: string},
+  images?: unknown;
+}

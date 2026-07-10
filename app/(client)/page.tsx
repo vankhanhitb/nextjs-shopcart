@@ -1,3 +1,18 @@
-import ShopPage from "./shop/page";
+import Container from "@/components/Container";
+import HomeBanner from "@/components/HomeBanner";
+import HomeCategories from "@/components/HomeCategories";
+import ProductGrid from "@/components/ProductGrid";
+import { getCategories } from "@/sanity/queries";
 
-export default ShopPage;
+export default async function Home() {
+  const categories = await getCategories(6);
+  console.log(categories);
+  return (
+    <Container>
+      <HomeBanner />
+      <ProductGrid />
+      <HomeCategories categories={categories} />
+    </Container>
+  );
+}
+

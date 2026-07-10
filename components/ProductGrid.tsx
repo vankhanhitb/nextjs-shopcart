@@ -22,15 +22,12 @@ export default function ProductGrid() {
       setLoading(true);
       try{
         const params = { variant: selectedTab.toLowerCase() };
-        console.log("GROQ params:", params);
         const response = await fetch(`/api/products?variant=${params.variant}`);
         const data = await response.json();
 
         if (!response.ok) {
           throw new Error(data?.error || "Unable to fetch products");
         }
-
-        console.log(data.products);
         setProducts(data.products);
       }catch(error){
         console.error("Product fetching Error: ", error);
@@ -42,7 +39,7 @@ export default function ProductGrid() {
   }, [selectedTab])
 
   return (
-    <div className="product-grid">
+    <div className="product-grid py-10">
       <HomeTabBar selectedTab={selectedTab} onTabselect={(tab) => setSelectedTab(tab)} />
       {loading ? (<div className="flex flex-col items-center justify-center py-10 min-h-80 gap-4 bg-gray-100 w-full mt-10">
         <div className="space-x-2 flex items-center text-blue-600">
