@@ -9,13 +9,14 @@ interface Props{
 
 export default function HomeTabBar({selectedTab, onTabselect}: Props) {
   return (
-    <div className="flex items-center justify-center flex-wrap gap-5">
-      <div className="flex items-center gap-3 text-sm font-semibold">
+    <div className="flex items-center justify-around flex-wrap gap-5">
+      <div className="flex flex-1 items-center gap-3 text-sm font-semibold">
         {
           productType?.map((item) => (
-            <button key={item?.title} value={item?.value} 
-            className={`border border-shop-light-green/20 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop-light-green hover:border-shop-light-green hover:text-white hoverEffect ${selectedTab === item?.title ? "bg-shop-light-green text-white border-shop-light-green": "bg-shop-light-green/20"}`}
+            <button
             onClick={() => onTabselect(item?.title)}
+            key={item?.title}
+            className={`border border-shop-light-green/20 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop-light-green hover:border-shop-light-green hover:text-white hoverEffect ${selectedTab === item?.value ? "bg-shop-light-green text-white border-shop-light-green": "bg-shop-light-green/20"}`}
             >
               {item?.title}
             </button>
