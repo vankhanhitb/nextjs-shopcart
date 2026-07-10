@@ -23,7 +23,7 @@ export default function HomeTabBar({selectedTab, onTabselect}: Props) {
           ))
         }
       </div>
-      <Link href={"/shop"} className="border border-shop-light-green/30 px-4 py-1.5 md:px-6 md:py2 rounded-full hover:bg-shop-light-green hover:border-shop-light-green hover:text-white hoverEffect">
+      <Link href={"/shop"} className="border border-shop-light-green/30 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop-light-green hover:border-shop-light-green hover:text-white hoverEffect">
         See All
       </Link>
     </div>
