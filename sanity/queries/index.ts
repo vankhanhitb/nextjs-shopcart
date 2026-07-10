@@ -2,7 +2,7 @@ import "server-only";
 
 import { client } from "../lib/client";
 
-import { BRAND_QUERY, BLOGS_QUERY } from "./query";
+import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS } from "./query";
 
 const categoryFields = `{
   ...,
@@ -47,3 +47,12 @@ export const getLatestBlogs = async () => {
   }
 }
 
+export const getDealProducts = async () => {
+  const query = DEAL_PRODUCTS;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+}
