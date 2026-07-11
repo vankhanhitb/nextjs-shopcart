@@ -23,10 +23,11 @@ export default function Shop({categories, brands, products}: Props) {
 
   const searchParams = useSearchParams();
   const brandParams = searchParams?.get("brand");
+  const categoryParams = searchParams?.get("category");
 
   const [productsList, setProductsList] = useState<Product[]>(products);
-  const [selectedCategory, setSelectedCategory] = useState<string|null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<string|null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string|null>(categoryParams);
+  const [selectedBrand, setSelectedBrand] = useState<string|null>(brandParams);
   const [selectedPrice, setSelectedPrice] = useState<string|null>(null)
 
   useEffect(() => {

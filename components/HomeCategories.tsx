@@ -14,7 +14,10 @@ export default function HomeCategories({categories}: {categories: Category[]}) {
           <div key={category?._id} className="bg-shop-light-bg p-5 flex items-center gap-3 group">
             {category?.image && (
               <div className="overflow-hidden border border-shop_orange/30 hover:border-shop_orange hoverEffect w-20 h-20 p-1">
-                <Link href={`/category/${category?.slug?.current}`}> 
+                <Link href={{
+                    pathname: "/shop",
+                    query: {category: category?.slug?.current}
+                  }}> 
                   <Image 
                     src={urlFor(category?.image).url()} 
                     alt="categoryImage" 
@@ -28,7 +31,7 @@ export default function HomeCategories({categories}: {categories: Category[]}) {
             <div className="space-y-2">
               <h3 className="text-base font-semibold">{category?.title}</h3>
               <p className="text-sm">
-                <span className="semibold text-shop-dark-green">{`${category?.productCount}`}</span> items Available
+                <span className="semibold text-shop-dark-green">{`${category?.productCount as number}`}</span> items Available
               </p>
             </div>
           </div>
