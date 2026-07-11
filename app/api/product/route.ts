@@ -7,7 +7,7 @@ const PRODUCT_QUERY = `*[
   _type == "product" && slug.current == $slug] | order(name asc) {
   ...,
   "categories": categories[]->{
-    title,
+    ...,
     "slug": slug.current
   },
   "brand": brand->{title, description}

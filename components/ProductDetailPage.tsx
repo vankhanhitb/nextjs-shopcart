@@ -5,6 +5,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import ImageView from "@/components/ImageView";
 import PriceView from "@/components/PriceView";
 import ProductCharacteristics from "@/components/ProductCharacteristics";
+import ProductDetailTab from "@/components/ProductDetailTab";
 import { CornerDownLeft, StarIcon, Truck } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { Product } from '@/sanity.types';
@@ -52,9 +53,11 @@ export default function ProductDetailPage({ slug } : {slug: string}) {
   return (
     <div>
       <Container className="flex flex-col md:flex-row gap-10 py-10">
+        {/* Main Image */}
         {product?.images && (
           <ImageView images={product?.images} isStock={product?.stock} />
         )}
+        {/* Main Info */}
         <div className="w-full md:w-1/2 flex flex-col gap-5">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold">{product?.name}</h2>
@@ -139,6 +142,8 @@ export default function ProductDetailPage({ slug } : {slug: string}) {
           </div>
         </div>
       </Container>
+        {/* Main Tab */}
+        <ProductDetailTab product={ product } />
     </div>
   )
 }

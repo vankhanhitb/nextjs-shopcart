@@ -265,6 +265,8 @@ export type Product = {
   categories?: Array<
     {
       _key: string;
+      title: string;
+      description: string;
     } & CategoryReference
   >;
   stock?: number;
