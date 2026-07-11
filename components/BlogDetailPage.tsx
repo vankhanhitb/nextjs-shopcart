@@ -31,7 +31,7 @@ export default function BlogDetailPage({ slug }: Props) {
         }
         const data = await response.json();
         setBlog(data.blog[0]);
-        console.log(data.blog[0]);
+        // console.log(data.blog[0]);
       } catch (error) {
         console.log("Error Fetching Data:", error);
       }finally {
