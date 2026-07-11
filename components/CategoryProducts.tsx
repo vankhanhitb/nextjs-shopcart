@@ -27,7 +27,7 @@ export default function CategoryProducts({categories, slug}: {categories: Catego
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`/api/getProductBySlug?slug=${encodeURIComponent(currentSlug)}`);
+        const response = await fetch(`/api/getProductByCategorySlug?slug=${encodeURIComponent(currentSlug)}`);
         const data = await response.json();
         if (!response.ok) {
           throw new Error(data?.error || "Unable to fetch products");

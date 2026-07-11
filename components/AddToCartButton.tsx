@@ -4,7 +4,7 @@ import React from 'react'
 import { Button } from './ui/button';
 import { ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { Product } from "@/types";
+import type { Product } from "@/sanity.types";
 
 interface Props {
   product: Product;
@@ -20,7 +20,7 @@ export default function AddToCartButton({product, className}: Props) {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <Button 
       onClick={() => handleAddToCart()}
       disabled={isOutOfStock}

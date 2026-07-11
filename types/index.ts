@@ -4,6 +4,7 @@ export type Product = {
   name: string;
   slug?: {current: string};
   images?: unknown[];
+  description?: string;
   price?: number;
   discount?: number;
   stock?: number;

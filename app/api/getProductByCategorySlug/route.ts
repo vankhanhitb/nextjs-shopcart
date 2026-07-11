@@ -9,7 +9,7 @@ const PRODUCT_QUERY = `*[
 ] | order(name asc) {
   ...,
   "categories": categories[]->title,
-  "brand": brand->{title}
+  "brand": brand->{title, description}
 }`;
 
 const serverClient = createClient({

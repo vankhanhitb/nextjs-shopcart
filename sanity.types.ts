@@ -235,6 +235,8 @@ export type CategoryReference = {
 };
 
 export type BrandReference = {
+  title: string;
+  description: string;
   _ref: string;
   _type: "reference";
   _weak?: boolean;

@@ -4,10 +4,10 @@ import PriceFormatter from './PriceFormatter';
 interface Props {
   price: number | undefined;
   discount: number | undefined;
-  classname?: string;
+  className?: string;
 }
 
-export default function PriceView({price, discount, classname}: Props) {
+export default function PriceView({price, discount, className}: Props) {
   return (
     <div>
       <div className="flex items-center gap-2">
