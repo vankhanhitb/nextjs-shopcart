@@ -26,7 +26,7 @@ export async function GET(request: Request) {
 
   if (!slug) {
     return NextResponse.json(
-      { error: "Missing variant search param" },
+      { error: "Missing slug search param" },
       { status: 400 },
     );
   }
