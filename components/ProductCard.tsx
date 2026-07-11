@@ -15,14 +15,16 @@ export default function ProductCard({ product }:{product: Product}) {
     <div className="text-sm border border-dark-blue/20 rounded-md bg-white group">
       <div className="relative group overflow-hidden bg-shop-light-bg">
         {product?.images && 
-          <Image 
-            src={urlFor(product?.images[0]).url()}
-            alt={product?.name.toLowerCase().replace(" ","-")}
-            loading="lazy"
-            width={700}
-            height={700}
-            className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop-light-bg hoverEffect ${product?.stock !== 0 ? "group-hover:scale-105" : "opacity-50"}`}
-          />
+          <Link href={`/product/${product?.slug?.current}`}>
+            <Image 
+              src={urlFor(product?.images[0]).url()}
+              alt={product?.name.toLowerCase().replace(" ","-")}
+              loading="lazy"
+              width={700}
+              height={700}
+              className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop-light-bg hoverEffect ${product?.stock !== 0 ? "group-hover:scale-105" : "opacity-50"}`}
+            />
+          </Link>
         }
         {/* WishList Icon */}
         <AddToWishlistButton  product={product} />
@@ -51,7 +53,9 @@ export default function ProductCard({ product }:{product: Product}) {
         {product?.categories && (
           <p className="uppercase line-clamp-1 text-xs text-gray-400">{product?.categories?.map((cat) => cat).join(",") }</p>
         )}
-        <Title className="md:text-xl line-clamp-1">{product?.name}</Title>
+        <Link href={`/product/${product?.slug?.current}`}>
+          <Title className="md:text-xl line-clamp-1">{product?.name}</Title>
+        </Link>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, index)=>(
