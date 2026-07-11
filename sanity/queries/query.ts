@@ -27,11 +27,36 @@ export const PRODUCT_QUERY = defineQuery(`*[_type == "product"] | order(name asc
   ...,
 }`)
 
-export const PRODUCT_FILLTER_QUERY = defineQuery(`*[_type == 'product' 
-  && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
-  && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
-  && price >= $minPrice && price <= $maxPrice
-] 
-| order(name asc) {
-  ...,"categories": categories[]->title
+export const BLOG_QUERY = defineQuery(`*[_type == "blog"] | order(title asc) {
+  ...,
+  title,
+  slug
+}`)
+
+export const BLOG_CATEGORIES = defineQuery(
+  `*[_type == "blog"]{
+     blogcategories[]->{
+    ...
+    }
+  }`
+);
+
+export const OTHERS_BLOG_QUERY = defineQuery(`*[
+  _type == "blog"
+  && defined(slug.current)
+  && slug.current != $slug
+]|order(publishedAt desc)[0...$quantity]{
+...
+  publishedAt,
+  title,
+  mainImage,
+  slug,
+  author->{
+    name,
+    image,
+  },
+  categories[]->{
+    title,
+    "slug": slug.current,
+  }
 }`);

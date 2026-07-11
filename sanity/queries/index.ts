@@ -1,8 +1,9 @@
 import "server-only";
 
 import { client } from "../lib/client";
+import { sanityFetch } from "../lib/live";
 
-import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS, CATEGORY_QUERY, PRODUCT_QUERY, PRODUCT_FILLTER_QUERY } from "./query";
+import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS, CATEGORY_QUERY, PRODUCT_QUERY, BLOG_QUERY, BLOG_CATEGORIES, OTHERS_BLOG_QUERY } from "./query";
 
 const categoryFields = `{
   ...,
@@ -77,21 +78,35 @@ export const getAllProducts = async () => {
   }
 }
 
-interface Props {
-  selectedCategory: string | null;
-  selectedBrand: string | null;
-  minPrice: number;
-  maxPrice: number;
-}
-
-export const getProductFilterBy = async ({selectedCategory, selectedBrand, minPrice, maxPrice} : Props ) => {
-  const query = PRODUCT_FILLTER_QUERY;
+export const getAllBlog = async () => {
+  const query = BLOG_QUERY;
   try {
-    return await client.fetch(query, {
-      selectedCategory, selectedBrand, minPrice, maxPrice
-    });
+    return await categoryClient.fetch(query);
   } catch (error) {
     console.error("Error fetching categories", error);
     return [];
   }
 }
+
+export const getBlogCategories = async () => {
+  const query = BLOG_CATEGORIES;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+};
+
+export const getOthersBlog = async (slug: string, quantity: number) => {
+  try {
+    const { data } = await sanityFetch({
+      query: OTHERS_BLOG_QUERY,
+      params: { slug, quantity },
+    });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
