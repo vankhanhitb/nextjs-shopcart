@@ -2,7 +2,7 @@ import "server-only";
 
 import { client } from "../lib/client";
 
-import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS } from "./query";
+import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS, CATEGORY_QUERY, PRODUCT_QUERY, PRODUCT_FILLTER_QUERY } from "./query";
 
 const categoryFields = `{
   ...,
@@ -51,6 +51,45 @@ export const getDealProducts = async () => {
   const query = DEAL_PRODUCTS;
   try {
     return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+}
+
+export const getAllCategories = async () => {
+  const query = CATEGORY_QUERY;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+}
+
+export const getAllProducts = async () => {
+  const query = PRODUCT_QUERY;
+  try {
+    return await categoryClient.fetch(query);
+  } catch (error) {
+    console.error("Error fetching categories", error);
+    return [];
+  }
+}
+
+interface Props {
+  selectedCategory: string | null;
+  selectedBrand: string | null;
+  minPrice: number;
+  maxPrice: number;
+}
+
+export const getProductFilterBy = async ({selectedCategory, selectedBrand, minPrice, maxPrice} : Props ) => {
+  const query = PRODUCT_FILLTER_QUERY;
+  try {
+    return await client.fetch(query, {
+      selectedCategory, selectedBrand, minPrice, maxPrice
+    });
   } catch (error) {
     console.error("Error fetching categories", error);
     return [];

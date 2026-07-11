@@ -8,9 +8,13 @@ import { Title } from './ui/text';
 import PriceView from './PriceView';
 import AddToCartButton from './AddToCartButton';
 
-import type { Product } from "@/types";
+import type { Product } from "@/sanity.types";
 
-export default function ProductCard({ product }:{product: Product}) {
+interface Props {
+  product: Product
+}
+
+export default function ProductCard({ product }: Props) {
   return (
     <div className="text-sm border border-dark-blue/20 rounded-md bg-white group">
       <div className="relative group overflow-hidden bg-shop-light-bg">
@@ -18,7 +22,7 @@ export default function ProductCard({ product }:{product: Product}) {
           <Link href={`/product/${product?.slug?.current}`}>
             <Image 
               src={urlFor(product?.images[0]).url()}
-              alt={product?.name.toLowerCase().replace(" ","-")}
+              alt="imageProductCard"
               loading="lazy"
               width={700}
               height={700}
@@ -27,7 +31,7 @@ export default function ProductCard({ product }:{product: Product}) {
           </Link>
         }
         {/* WishList Icon */}
-        <AddToWishlistButton  product={product} />
+        <AddToWishlistButton product={product} />
         {/* Sale */}
         {product?.status === "sale" && (
           <p className="absolute top-2 px-2 py-1 left-2 z-10 text-xs border border-dart/50 rounded-full group-hover:border-shop-light-green  group-hover:text-shop-light-green hoverEffect">Sale!</p>

@@ -1,8 +1,13 @@
 import { Heart } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import type { Product } from "@/types";
+import type { Product } from "@/sanity.types";
 
-export default function AddToWishlistButton({product, className}: {product: Product, className?: string}) {
+interface Props {
+  product: Product;
+  className?: string;
+}
+
+export default function AddToWishlistButton({product, className}: Props) {
   return (
     <div className={cn("absolute top-2 right-2 z-10", className)}>
       <button 

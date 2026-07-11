@@ -2,6 +2,7 @@
 
 import { Radio as RadioPrimitive } from "@base-ui/react/radio"
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
+import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 
@@ -29,7 +30,7 @@ function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
         data-slot="radio-group-indicator"
         className="flex size-4 items-center justify-center"
       >
-        <span className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground" />
+        <Check className="h-3.5 w-3.5 fill-shop_dark_green text-shop_dark_green" />
       </RadioPrimitive.Indicator>
     </RadioPrimitive.Root>
   )
