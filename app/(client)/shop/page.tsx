@@ -1,5 +1,5 @@
 import { getAllCategories, getBrand, getAllProducts} from "@/sanity/queries"
-import Shop from "@/components/Shop"
+import Shop from "@/components/shop/Shop"
 
 export default async function ShopPage(){
   const categories = await getAllCategories();

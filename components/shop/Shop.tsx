@@ -2,14 +2,14 @@
 
 import { Brand, Category, Product } from '@/sanity.types';
 import {useEffect, useState} from 'react'
-import Container from './Container';
-import { Title } from './ui/text';
+import Container from '../Container';
+import { Title } from '../ui/text';
 import { Loader2 } from "lucide-react";
-import NoProductAvailable from "./NoProductAvailable";
-import ProductCard from "./ProductCard";
-import CategoryList from "@/components/CategoryList";
-import BrandList from "@/components/BrandList";
-import PriceList from "@/components/PriceList";
+import NoProductAvailable from "../NoProductAvailable";
+import ProductCard from "../ProductCard";
+import CategoryList from "@/components/shop/CategoryList";
+import BrandList from "@/components/shop/BrandList";
+import PriceList from "@/components/shop/PriceList";
 import { useSearchParams } from 'next/navigation';
 
 type Props = {
