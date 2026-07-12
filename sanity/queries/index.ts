@@ -3,7 +3,17 @@ import "server-only";
 import { client } from "../lib/client";
 import { sanityFetch } from "../lib/live";
 
-import { BRAND_QUERY, BLOGS_QUERY, DEAL_PRODUCTS, CATEGORY_QUERY, PRODUCT_QUERY, BLOG_QUERY, BLOG_CATEGORIES, OTHERS_BLOG_QUERY } from "./query";
+import { 
+  BRAND_QUERY, 
+  BLOGS_QUERY, 
+  DEAL_PRODUCTS, 
+  CATEGORY_QUERY, 
+  PRODUCT_QUERY, 
+  BLOG_QUERY, 
+  BLOG_CATEGORIES, 
+  OTHERS_BLOG_QUERY,
+  MY_ORDERS_QUERY,
+ } from "./query";
 
 const categoryFields = `{
   ...,
@@ -107,6 +117,16 @@ export const getOthersBlog = async (slug: string, quantity: number) => {
     return data ?? [];
   } catch (error) {
     console.log("Error fetching all brands:", error);
+    return [];
+  }
+};
+
+export const getMyOrders = async (userId: string) => {
+  const query = MY_ORDERS_QUERY;
+  try {
+    return await categoryClient.fetch(query, {userId});
+  } catch (error) {
+    console.error("Error fetching categories", error);
     return [];
   }
 };

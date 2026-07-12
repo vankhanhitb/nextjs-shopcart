@@ -60,3 +60,9 @@ export const OTHERS_BLOG_QUERY = defineQuery(`*[
     "slug": slug.current,
   }
 }`);
+
+export const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(createdAt desc){
+...,products[]{
+  ...,product->
+}
+}`);
