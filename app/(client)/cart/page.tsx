@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  createCheckoutSession,
-} from "@/actions/createCheckoutSession";
+import { createCheckoutSession, type Metadata } from "@/actions/createCheckoutSession";
 
 import EmptyCart from "@/components/EmptyCart";
 import NoAccess from "@/components/NoAccess";
@@ -32,14 +30,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-type Metadata = {
-  orderNumber: string;
-  customerName: string;
-  customerEmail: string;
-  clerkUserId?: string;
-  address: Address | null;
-};
 
 export default function CartPage() {
   const {
@@ -95,17 +85,27 @@ export default function CartPage() {
   const handleCheckout = async () => {
     setLoading(true);
     try {
+      const customerEmail =
+        user?.primaryEmailAddress?.emailAddress ||
+        user?.emailAddresses[0]?.emailAddress;
+
+      if (!customerEmail) {
+        throw new Error("Customer email is required to create a checkout session");
+      }
+
       const metadata: Metadata = {
         orderNumber: crypto.randomUUID(),
         customerName: user?.fullName ?? "Unknown",
-        customerEmail: user?.emailAddresses[0]?.emailAddress ?? "Unknown",
+        customerEmail,
         clerkUserId: user?.id,
         address: selectedAddress,
       };
       const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl;
+      if (!checkoutUrl) {
+        throw new Error("Invalid checkout URL");
       }
+
+      window.location.href = checkoutUrl;
     } catch (error) {
       console.error("Error creating checkout session:", error);
     } finally {

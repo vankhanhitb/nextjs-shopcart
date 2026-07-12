@@ -9,7 +9,7 @@ export default function MobileMenu() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   return (
     <>
-      <Button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+      <Button className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         <AlignLeft className="hover:text-dark hoverEffect md:hidden hover:cursor-pointer" />
       </Button>
       <div className="md:hidden ">

@@ -14,7 +14,7 @@ import PriceFormatter from "./PriceFormatter";
 import AddToCartButton from "./AddToCartButton";
 
 const WishListProducts = () => {
-  const [visibleProducts, setVisibleProducts] = useState(7);
+  const [visibleProducts, setVisibleProducts] = useState(5);
   const { favoriteProduct, removeFromFavorite, resetFavorite } = useStore();
   const loadMore = () => {
     setVisibleProducts((prev) => Math.min(prev + 5, favoriteProduct.length));

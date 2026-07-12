@@ -1,10 +1,10 @@
 "use server";
 
 import stripe from "@/lib/stripe";
-import { Address } from "@/sanity.types";
+import type { Address } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
-import { CartItem } from "@/store";
-import Stripe from "stripe";
+import type { CartItem } from "@/store";
+import type Stripe from "stripe";
 
 export interface Metadata {
   orderNumber: string;
@@ -19,11 +19,34 @@ export interface GroupedCartItems {
   quantity: number;
 }
 
+function getBaseUrl() {
+  const configuredBaseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
+  const baseUrl =
+    configuredBaseUrl ||
+    (process.env.NODE_ENV === "production" ? undefined : "http://localhost:3000");
+
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_BASE_URL is required in production");
+  }
+
+  const parsedUrl = new URL(baseUrl);
+  if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+    throw new Error("NEXT_PUBLIC_BASE_URL must be an absolute URL, for example http://localhost:3000");
+  }
+
+  return parsedUrl.origin;
+}
+
 export async function createCheckoutSession(
   items: GroupedCartItems[],
   metadata: Metadata
-) {
+): Promise<string> {
   try {
+    const baseUrl = getBaseUrl();
+
     // Retrieve existing customer or create a new one
     const customers = await stripe.customers.list({
       email: metadata.customerEmail,
@@ -36,7 +59,7 @@ export async function createCheckoutSession(
         orderNumber: metadata.orderNumber,
         customerName: metadata.customerName,
         customerEmail: metadata.customerEmail,
-        clerkUserId: metadata.clerkUserId!,
+        clerkUserId: metadata.clerkUserId ?? "",
         address: JSON.stringify(metadata.address),
       },
       mode: "payment",
@@ -45,13 +68,11 @@ export async function createCheckoutSession(
       invoice_creation: {
         enabled: true,
       },
-      success_url: `${
-        process.env.NEXT_PUBLIC_BASE_URL
-      }/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${encodeURIComponent(metadata.orderNumber)}`,
+      cancel_url: `${baseUrl}/cart`,
       line_items: items?.map((item) => ({
         price_data: {
-          currency: "USD",
+          currency: "usd",
           unit_amount: Math.round(item?.product?.price! * 100),
           product_data: {
             name: item?.product?.name || "Unknown Product",
@@ -73,6 +94,10 @@ export async function createCheckoutSession(
     }
 
     const session = await stripe.checkout.sessions.create(sessionPayload);
+    if (!session.url) {
+      throw new Error("Stripe did not return a checkout URL");
+    }
+
     return session.url;
   } catch (error) {
     console.error("Error creating Checkout Session", error);
