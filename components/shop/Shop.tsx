@@ -11,6 +11,7 @@ import CategoryList from "@/components/shop/CategoryList";
 import BrandList from "@/components/shop/BrandList";
 import PriceList from "@/components/shop/PriceList";
 import { useSearchParams } from 'next/navigation';
+import { Button } from "../ui/button";
 
 type Props = {
   categories: Category[];
@@ -86,11 +87,11 @@ export default function Shop({categories, brands, products}: Props) {
                 <Title>Get the product as you needs</Title>
               {
                 (selectedBrand !== null || selectedCategory !== null || selectedPrice !== null) && (
-                  <button 
+                  <Button 
                   onClick={() => {resetFilter()}}
                   className="text-shop-dark-green underline text-sm mt-2 font-medium hover:text-darkRed hoverEffect">
                     Reset Filter
-                  </button>
+                  </Button>
                 )
               }
               </div>

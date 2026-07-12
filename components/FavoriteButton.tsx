@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from 'react';
 import useStore from "@/store";
 import { toast } from 'react-hot-toast';
+import { Button } from "./ui/button";
 
 type Props = {
   showProduct: boolean;
@@ -43,7 +44,7 @@ export default function FavoriteButton({showProduct, product}: Props) {
           </span>
         </Link>
       ):(
-        <button
+        <Button
         onClick={handleFavorite}
         className="group relative hover:text-shop_light_green hoverEffect border border-shop_light_green/80 hover:border-shop_light_green p-1.5 rounded-sm">
           {(existingProduct) ? (
@@ -51,7 +52,7 @@ export default function FavoriteButton({showProduct, product}: Props) {
           ):(
             <HeartIcon className="text-shop_light_green/80 group-hover:text-shop_light_green hoverEffect mt-.5 w-5 h-5" />
           )}
-        </button>
+        </Button>
       )}
       
     </div>

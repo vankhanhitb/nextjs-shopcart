@@ -1,9 +1,12 @@
+"use client";
+
 import { Heart } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import type { Product } from "@/sanity.types";
 import { useEffect, useState } from 'react';
 import useStore from '@/store';
 import { toast } from 'react-hot-toast';
+import { Button } from './ui/button';
 
 interface Props {
   product: Product;
@@ -33,17 +36,17 @@ export default function AddToWishlistButton({product, className}: Props) {
   
   return (
     <div className={cn("absolute top-2 right-2 z-10", className)}>
-      <button
+      <Button
         onClick={handleFavorite}
         value={product?._id}
         type="button" 
         rel="butotn" 
-        className={`p-2.5 rounded-full hover:bg-shop-dark-green hover:text-white hoverEffect ${existingProduct ? "bg-shop-dark-green/80 text-white" : "bg-white text-dark"}`} 
+        className={`w-8 h-8 p-2 rounded-full hover:bg-shop-dark-green hover:text-white hoverEffect ${existingProduct ? "bg-shop-dark-green/80 text-white" : "bg-white text-dark"}`} 
       >
         <Heart
          size={15}
         />
-      </button>
+      </Button>
     </div>
   )
 }

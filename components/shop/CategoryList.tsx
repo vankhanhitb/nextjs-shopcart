@@ -3,6 +3,7 @@ import type { Category } from "@/sanity.types"
 import { Title } from '../ui/text';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
+import { Button } from '../ui/button';
 
 interface Props {
   categories: Category[];
@@ -44,12 +45,12 @@ export default function CategoryList({categories, selectedCategory, setSelectedC
           )
         })}
         {selectedCategory && (
-          <button
+          <Button
             onClick={() => setSelectedCategory(null)}
             className="text-sm font-medium mt-2 underline underline-offset-2 decoration-1 hover:text-shop-dark-green hoverEffect text-left"
           >
             Reset selection
-          </button>
+          </Button>
         )}
       </RadioGroup>
     </div>

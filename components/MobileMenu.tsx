@@ -3,14 +3,15 @@
 import { AlignLeft } from 'lucide-react';
 import React, { useState } from 'react'
 import SideMenu from './SideMenu';
+import { Button } from "./ui/button";
 
 export default function MobileMenu() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   return (
     <>
-      <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+      <Button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         <AlignLeft className="hover:text-dark hoverEffect md:hidden hover:cursor-pointer" />
-      </button>
+      </Button>
       <div className="md:hidden ">
         <SideMenu 
           isOpen={isSidebarOpen}

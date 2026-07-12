@@ -60,14 +60,18 @@ export default function CartPage() {
     const fetchAddresses = async () => {
       setLoading(true);
       try {
-        const query = `*[_type=="address"] | order(publishedAt desc)`;
-        const data = await client.fetch(query);
-        setAddresses(data);
-        const defaultAddress = data.find((addr: Address) => addr.default);
+        const data = await fetch(`/api/address`);
+        if(!data.ok) {
+          console.log("Error Fectching Address Data");
+        }
+        const responseAddress = await data.json();
+        const address = responseAddress.address;
+        setAddresses(address);
+        const defaultAddress = address.find((addr: Address) => addr.default);
         if (defaultAddress) {
           setSelectedAddress(defaultAddress);
-        } else if (data.length > 0) {
-          setSelectedAddress(data[0]); // Optional: select first address if no default
+        } else if (address.length > 0) {
+          setSelectedAddress(address[0]); // Optional: select first address if no default
         }
       } catch (error) {
         console.log("Addresses fetching error:", error);
@@ -267,7 +271,7 @@ export default function CartPage() {
                               <div
                                 key={address?._id}
                                 onClick={() => setSelectedAddress(address)}
-                                className={`flex items-center space-x-2 mb-4 cursor-pointer ${selectedAddress?._id === address?._id && "text-shop_dark_green"}`}
+                                className={`flex items-center space-x-2 mb-4 cursor-pointer ${selectedAddress?._id === address?._id && "text-shop-dark-green"}`}
                               >
                                 <RadioGroupItem
                                   value={address?._id.toString()}

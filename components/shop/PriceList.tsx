@@ -2,6 +2,7 @@ import React from 'react'
 import { Title } from '../ui/text';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
+import { Button } from '../ui/button';
 
 interface Props {
   selectedPrice?: string | null;
@@ -42,12 +43,12 @@ export default function PriceList({selectedPrice, setSelectedPrice}: Props) {
         ))}
       </RadioGroup>
       {selectedPrice && (
-        <button
+        <Button
           onClick={() => setSelectedPrice(null)}
           className="text-sm font-medium mt-2 underline underline-offset-2 decoration-1 hover:text-shop-dark-green hoverEffect"
         >
           Reset selection
-        </button>
+        </Button>
       )}
     </div>
   )

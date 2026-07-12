@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 import Image from "next/image";
 import { urlFor } from '@/sanity/lib/image';
+import { Button } from "./ui/button";
 
 type Props = {
   images?: Array<{
@@ -54,7 +55,7 @@ export default function ImageView({images= [], isStock}: Props) {
       </AnimatePresence>
       <div className="grid grid-cols-6 gap-2">
         {images?.map((image) => (
-          <button
+          <Button
             key={image?._key}
             onClick={() => setActive(image)}
             className={`border rounded-md overflow-hidden ${active?._key === image?._key ? "border-darkColor opacity-100" : "opacity-60"}`}
@@ -66,7 +67,7 @@ export default function ImageView({images= [], isStock}: Props) {
               height={100}
               className="w-full h-auto object-contain"
             />
-          </button>
+          </Button>
         ))}
       </div>
     </div>

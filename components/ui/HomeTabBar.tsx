@@ -1,7 +1,7 @@
 import { productType } from '@/constants/data';
 import Link from 'next/link';
 import React from 'react'
-
+import {Button} from "../ui/button";
 interface Props{
   selectedTab: string;
   onTabselect: (tab: string) => void;
@@ -13,13 +13,13 @@ export default function HomeTabBar({selectedTab, onTabselect}: Props) {
       <div className="flex flex-1 items-center gap-3 text-sm font-semibold">
         {
           productType?.map((item) => (
-            <button
+            <Button
             onClick={() => onTabselect(item?.value)}
             key={item?.title}
             className={`border border-shop-light-green/20 px-4 py-1.5 md:px-6 md:py-2 rounded-full hover:bg-shop-light-green hover:border-shop-light-green hover:text-white hoverEffect ${selectedTab === item?.value ? "bg-shop-light-green text-white border-shop-light-green": "bg-shop-light-green/20"}`}
             >
               {item?.title}
-            </button>
+            </Button>
           ))
         }
       </div>
