@@ -61,7 +61,7 @@ export const OTHERS_BLOG_QUERY = defineQuery(`*[
   }
 }`);
 
-export const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(createdAt desc){
+export const MY_ORDERS_QUERY = defineQuery(`*[_type == 'order' && clerkUserId == $userId] | order(_createdAt desc){
 ...,products[]{
   ...,product->
 }

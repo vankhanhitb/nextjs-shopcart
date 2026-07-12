@@ -24,75 +24,78 @@ const OrdersComponent = ({ orders }: { orders: Order[] }) => {
   };
   return (
     <>
-      <TableBody>
-        <TooltipProvider>
+      <TooltipProvider>
+        <TableBody>
           {orders?.map((order) => (
-            <Tooltip key={order?.orderNumber}>
-              <TooltipTrigger>
-                <TableRow
-                  className="cursor-pointer hover:bg-gray-100 h-12"
-                  onClick={() => setSelectedOrder(order)}
-                >
-                  <TableCell className="font-medium">
-                    {order.orderNumber?.slice(-10) ?? "N/A"}...
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {order?.orderDate &&
-                      format(new Date(order.orderDate), "dd/MM/yyyy")}
-                  </TableCell>
-                  <TableCell>{order.customerName}</TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    {order.email}
-                  </TableCell>
-                  <TableCell>
-                    <PriceFormatter
-                      amount={order?.totalPrice}
-                      className="text-black font-medium"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    {order?.status && (
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                          order.status === "paid"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
-                      >
-                        {order?.status.charAt(0).toUpperCase() +
-                          order?.status.slice(1)}
-                      </span>
-                    )}
-                  </TableCell>
+            <TableRow
+              key={order?._id || order?.orderNumber}
+              className="h-12 cursor-pointer hover:bg-gray-100"
+              title="Click to see order details"
+              onClick={() => setSelectedOrder(order)}
+            >
+              <TableCell className="font-medium">
+                {order.orderNumber?.slice(-10) ?? "N/A"}...
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                {order?.orderDate &&
+                  format(new Date(order.orderDate), "dd/MM/yyyy")}
+              </TableCell>
+              <TableCell>{order.customerName}</TableCell>
+              <TableCell className="hidden sm:table-cell">
+                {order.email}
+              </TableCell>
+              <TableCell>
+                <PriceFormatter
+                  amount={order?.totalPrice}
+                  className="text-black font-medium"
+                />
+              </TableCell>
+              <TableCell>
+                {order?.status && (
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                      order.status === "paid"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    {order?.status.charAt(0).toUpperCase() +
+                      order?.status.slice(1)}
+                  </span>
+                )}
+              </TableCell>
 
-                  <TableCell className="hidden sm:table-cell">
-                    {order?.invoice && (
-                      <p className="font-medium line-clamp-1">
-                        {order?.invoice ? order?.invoice?.number : "----"}
-                      </p>
-                    )}
-                  </TableCell>
-                  <TableCell
+              <TableCell className="hidden sm:table-cell">
+                {order?.invoice && (
+                  <p className="font-medium line-clamp-1">
+                    {order?.invoice ? order?.invoice?.number : "----"}
+                  </p>
+                )}
+              </TableCell>
+              <TableCell className="text-center">
+                <Tooltip>
+                  <TooltipTrigger
+                    type="button"
                     onClick={(event) => {
                       event.stopPropagation();
                       handleDelete();
                     }}
-                    className="flex items-center justify-center group"
+                    className="inline-flex items-center justify-center rounded-sm p-1 group"
                   >
                     <X
                       size={20}
                       className="group-hover:text-shop_dark_green hoverEffect"
                     />
-                  </TableCell>
-                </TableRow>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Click to see order details</p>
-              </TooltipContent>
-            </Tooltip>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Delete order</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TableCell>
+            </TableRow>
           ))}
-        </TooltipProvider>
-      </TableBody>
+        </TableBody>
+      </TooltipProvider>
       <OrderDetailDialog
         order={selectedOrder}
         isOpen={!!selectedOrder}
